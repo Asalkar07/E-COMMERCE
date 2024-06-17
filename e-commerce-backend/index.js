@@ -244,6 +244,11 @@ app.post("/removeproduct", async (req, res) => {
   res.json({success:true,name:req.body.name})
 });
 
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.listen(port, (error) => {
   if (!error) console.log("Server Running on port " + port);
   else console.log("Error : ", error);
